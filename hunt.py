@@ -1,0 +1,38 @@
+import phonenumbers
+from phonenumbers import geocoder, carrier
+
+# 🔥 BIG BANNER
+print("""
+██╗  ██╗██╗   ██╗███╗   ██╗████████╗    ███╗   ██╗██╗   ██╗███╗   ███╗██████╗ ███████╗██████╗ 
+██║  ██║██║   ██║████╗  ██║╚══██╔══╝    ████╗  ██║██║   ██║████╗ ████║██╔══██╗██╔════╝██╔══██╗
+███████║██║   ██║██╔██╗ ██║   ██║       ██╔██╗ ██║██║   ██║██╔████╔██║██████╔╝█████╗  ██████╔╝
+██╔══██║██║   ██║██║╚██╗██║   ██║       ██║╚██╗██║██║   ██║██║╚██╔╝██║██╔══██╗██╔══╝  ██╔══██╗
+██║  ██║╚██████╔╝██║ ╚████║   ██║       ██║ ╚████║╚██████╔╝██║ ╚═╝ ██║██████╔╝███████╗██║  ██║
+╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝   ╚═╝       ╚═╝  ╚═══╝ ╚═════╝ ╚═╝     ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═╝
+""")
+
+print("🔥 HUNT NUMBER TOOL ACTIVATED 🔥\n")
+
+while True:
+    number = input("Enter Phone Number with country code : ")
+
+    if number.lower() == "exit":
+        print("Exiting...")
+        break
+
+    try:
+        parsed = phonenumbers.parse(number)
+
+        location = geocoder.description_for_number(parsed, "en")
+        sim = carrier.name_for_number(parsed, "en")
+        valid = phonenumbers.is_valid_number(parsed)
+
+        print("\n📱 RESULT:")
+        print("Number :", number)
+        print("Location :", location)
+        print("Carrier :", sim)
+        print("Valid :", valid)
+        print("-" * 40)
+
+    except:
+        print("❌ Invalid Number Format\n")
